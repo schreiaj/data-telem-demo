@@ -1,0 +1,62 @@
+package views
+
+import "fmt"
+
+templ Index(fields []string) {
+
+ <!DOCTYPE html>
+    	<html lang="en">
+    	<head>
+    	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    	    <script type="module" defer src="https://cdn.jsdelivr.net/gh/starfederation/datastar@v1.0.0-beta.1/bundles/datastar.js"></script>
+    	    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+            <script src="https://cdn.tailwindcss.com"></script>
+    	    <title>Basic Dashboard</title>
+    	</head>
+            <body class="bg-gray-100">
+
+                <!-- Dashboard Wrapper -->
+                <div class="flex h-screen">
+
+                    <!-- Sidebar -->
+                    <div class="w-64 bg-base-200 p-4">
+                        <h2 class="text-2xl font-semibold text-center mb-8">Dashboard</h2>
+                        <ul>
+                            <li><a href="#" class="block py-2 px-4 rounded hover:bg-base-300">Home</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Main Content Area -->
+                    <div class="flex-1">
+                        <!-- Top Navbar -->
+                        <div class="bg-base-300 p-4 flex justify-between items-center">
+                            <h1 class="text-xl font-semibold">Dashboard Overview</h1>
+                            <div class="flex items-center space-x-4">
+                                <span class="font-medium">Welcome, User</span>
+                                <button class="btn btn-primary" data-on-click__delay.500ms="@get('/stream')">Connect</button>
+                            </div>
+                        </div>
+
+                        <!-- Dashboard Content -->
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                for _, field := range fields {
+                                    <div class="card bg-base-100 shadow-xl">
+                                        <div class="card-body">
+                                            <h2 class="card-title">{field}</h2>
+                                            <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300">
+                                                <path data-attr-d={fmt.Sprintf("$%s", field)} stroke="white" stroke-width="2" fill="none"></path>
+                                            </svg>
+
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </body>
+    	</html>
+}
